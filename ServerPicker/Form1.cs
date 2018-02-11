@@ -18,7 +18,7 @@ namespace ServerPicker
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.resultLabel.Text = string.Empty;
+            this.resultLabel.Text = ASServer.GetCurrentEnv();
         }
 
         private void Apply_Click_AL_15(object sender, EventArgs e)
