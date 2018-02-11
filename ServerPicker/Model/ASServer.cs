@@ -92,8 +92,9 @@ namespace ServerPicker.Model
             }
             catch (Exception ex)
             {
-                Name = ex.Message;
+                CurrentEnvironment = ex.Message.Contains("is denied") ? "No permissions to update hosts file. Open as Adminstrator" : ex.Message;
             }
+
 
         }
     }
