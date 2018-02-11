@@ -23,8 +23,12 @@ namespace ServerPicker.Model
         public const string AL_21_Name = "AL_21";
         public const string localhost_IP = "127.0.0.1";
         public const string localhost_Name = "localhost";
-        public const string Staging_IP = "190.10.10.99";
-        public const string Staging_Name = "Staging";
+        public const string STG_1_IP = "190.10.10.97";
+        public const string STG_1_Name = "STG_1";
+        public const string STG_2_IP = "190.10.10.98";
+        public const string STG_2_Name = "STG_2";
+        public const string STG_3_IP = "190.10.10.99";
+        public const string STG_3_Name = "STG_3";
         public const string Prod_IP = "190.10.10.00";
         public const string Prod_Name = "Prod";
         private string serverName;
@@ -39,7 +43,9 @@ namespace ServerPicker.Model
                 case AL_7_Name: IP = AL_7_IP; Name = AL_7_Name; break;
                 case AL_19_Name: IP = AL_19_IP; Name = AL_19_Name; break;
                 case AL_21_Name: IP = AL_21_IP; Name = AL_21_Name; break;
-                case Staging_Name: IP = Staging_IP; Name = Staging_Name; break;
+                case STG_1_Name: IP = STG_1_IP; Name = STG_1_Name; break;
+                case STG_2_Name: IP = STG_2_IP; Name = STG_2_Name; break;
+                case STG_3_Name: IP = STG_3_IP; Name = STG_3_Name; break;
                 case Prod_Name: IP = Prod_IP; Name = Prod_Name; break;
                 case localhost_Name: IP = localhost_IP; Name = localhost_Name; break;
                 default: break;

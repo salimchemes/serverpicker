@@ -46,7 +46,7 @@ namespace ServerPicker
             CreateServerObject(((ButtonBase)sender).Text);
         }
 
-        private void Apply_Click_Staging(object sender, EventArgs e)
+        private void Apply_Click_Stg_1(object sender, EventArgs e)
         {
             CreateServerObject(((ButtonBase)sender).Text);
         }
@@ -56,10 +56,21 @@ namespace ServerPicker
             CreateServerObject(((ButtonBase)sender).Text);
         }
 
+        private void Apply_Click_Stg_2(object sender, EventArgs e)
+        {
+            CreateServerObject(((ButtonBase)sender).Text);
+        }
+
+        private void Apply_Click_Stg_3(object sender, EventArgs e)
+        {
+            CreateServerObject(((ButtonBase)sender).Text);
+        }
+
         private void CreateServerObject(string serverName)
         {
             var server = new ASServer(serverName); 
             resultLabel.Text = server.CurrentEnvironment; 
         }
+
     }
 }
