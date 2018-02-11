@@ -92,7 +92,7 @@ namespace ServerPicker.Model
             }
             catch (Exception ex)
             {
-                CurrentEnvironment = ex.Message.Contains("is denied") ? "No permissions to update hosts file. Open as Adminstrator" : ex.Message;
+                CurrentEnvironment = ex.Message.Contains("is denied") ? "No permissions to update hosts file. Run as adminstrator" : ex.Message;
             }
 
 
@@ -132,7 +132,7 @@ namespace ServerPicker.Model
             }
             catch (Exception ex)
             {
-                return ex.Message.Contains("is denied") ? "No permissions to update hosts file. Open as Adminstrator" : ex.Message;
+                return ex.Message.Contains("is denied") ? "No permissions to update hosts file. Run as adminstrator" : ex.Message;
             }
 
         }
