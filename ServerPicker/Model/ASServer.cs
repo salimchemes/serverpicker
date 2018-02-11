@@ -92,7 +92,7 @@ namespace ServerPicker.Model
             }
             catch (Exception ex)
             {
-                CurrentEnvironment = ex.Message.Contains("is denied") ? "No permissions to update hosts file. Run as adminstrator" : ex.Message;
+                CurrentEnvironment = ex.Message.Contains("is denied") ? "No permissions to update hosts file. Run as administrator" : ex.Message;
             }
 
 
@@ -127,12 +127,12 @@ namespace ServerPicker.Model
 
                 var hostFileAttributes = currentEnv.Split(' ');
 
-                return hostFileAttributes.Length == 3 ? string.Format("Current Environment: {0} (IP#: {1})", hostFileAttributes[2].ToString().Replace("#", string.Empty), hostFileAttributes[0]) : string.Empty;
+                return hostFileAttributes.Length == 3 ? string.Format("Current Environment: {0} (IP#: {1})", hostFileAttributes[2].ToString().Replace("#", string.Empty), hostFileAttributes[0]) : "No AS Environment defined on host file";
  
             }
             catch (Exception ex)
             {
-                return ex.Message.Contains("is denied") ? "No permissions to update hosts file. Run as adminstrator" : ex.Message;
+                return ex.Message.Contains("is denied") ? "No permissions to update hosts file. Run as administrator" : ex.Message;
             }
 
         }
