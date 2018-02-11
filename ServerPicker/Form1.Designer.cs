@@ -57,9 +57,10 @@
             // resultLabel
             // 
             this.resultLabel.AutoSize = true;
+            this.resultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resultLabel.Location = new System.Drawing.Point(8, 399);
             this.resultLabel.Name = "resultLabel";
-            this.resultLabel.Size = new System.Drawing.Size(87, 20);
+            this.resultLabel.Size = new System.Drawing.Size(98, 20);
             this.resultLabel.TabIndex = 1;
             this.resultLabel.Text = "resultLabel";
             // 
@@ -188,6 +189,7 @@
             this.Controls.Add(this.resultLabel);
             this.Controls.Add(this.localhost);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "ServerPicker";
             this.Load += new System.EventHandler(this.Form1_Load);

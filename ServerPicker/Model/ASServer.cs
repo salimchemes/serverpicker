@@ -82,7 +82,7 @@ namespace ServerPicker.Model
                 {
                     File.AppendAllLines(hostfile, new String[] { tales });
                 }
-                CurrentEnvironment = string.Format("Current Environment: {0} ({1})", Name, IP);
+                CurrentEnvironment = string.Format("Current Environment: {0} (IP#: {1})", Name, IP);
             }
             catch (Exception ex)
             {
