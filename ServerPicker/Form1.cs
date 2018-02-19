@@ -22,7 +22,7 @@ namespace ServerPicker
             AddAlphaButtons(allEnvs);
             AddStagingButtons(allEnvs);
             AddProdButton(allEnvs);
-            resultLabel.Text = ASServer.GetCurrentEnv();
+            resultLabel.Text = ASServer.GetCurrentEnv(); 
         }
 
         private void AddAlphaButtons(List<ASServer> allEnvs)

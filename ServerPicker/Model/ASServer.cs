@@ -10,28 +10,7 @@ namespace ServerPicker.Model
 {
     public class ASServer
     {
-        const string ASCOM = "www.alaskaair.com";
-        //const string AL_15_IP = "10.80.73.181";
-        //const string AL_15_Name = "AL_15";
-        //const string AL_13_IP = "10.80.120.90";
-        //const string AL_13_Name = "AL_13";
-        //const string AL_7_IP = "10.80.120.119";
-        //const string AL_7_Name = "AL_7";
-        //const string AL_19_IP = "10.80.120.233";
-        //const string AL_19_Name = "AL_19";
-        //const string AL_21_IP = "10.80.120.239";
-        //const string AL_21_Name = "AL_21";
-        //const string AL_16_IP = "10.80.73.186";
-        //const string AL_16_Name = "AL_16";        
-        //const string localhost_IP = "127.0.0.1";  
-        //const string localhost_Name = "localhost";
-        //const string STG_1_IP = "159.49.47.10";
-        //const string STG_1_Name = "STG_1";
-        //const string STG_2_IP = "159.49.47.17";
-        //const string STG_2_Name = "STG_2";
-        //const string STG_3_IP = "159.49.253.77";
-        //const string STG_3_Name = "STG_3";
-        //const string Prod_IP = "";
+        const string ASCOM = "www.alaskaair.com"; 
         const string Prod_Name = "Prod";      
 
         public string IP { get; set; }
@@ -68,7 +47,7 @@ namespace ServerPicker.Model
                     }
                     File.WriteAllLines(hostfile, lines);
                 }
-                else if (!lines.Contains(tales) && !Name.Equals(Prod_Name))
+                else if (!lines.Contains(tales) && !xmlServer.Name.Equals(Prod_Name))
                 {
                     File.AppendAllLines(hostfile, new String[] { tales });
                 }
