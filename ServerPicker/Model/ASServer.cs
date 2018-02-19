@@ -10,25 +10,27 @@ namespace ServerPicker.Model
     public class ASServer
     {
         const string ASCOM = "www.alaskaair.com";
-        const string AL_15_IP = "190.10.10.15";
+        const string AL_15_IP = "10.80.73.181";
         const string AL_15_Name = "AL_15";
-        const string AL_13_IP = "190.10.10.13";
+        const string AL_13_IP = "10.80.120.90";
         const string AL_13_Name = "AL_13";
-        const string AL_7_IP = "190.10.10.7";
+        const string AL_7_IP = "10.80.120.119";
         const string AL_7_Name = "AL_7";
-        const string AL_19_IP = "190.10.10.19";
+        const string AL_19_IP = "10.80.120.233";
         const string AL_19_Name = "AL_19";
-        const string AL_21_IP = "190.10.10.21";
+        const string AL_21_IP = "10.80.120.239";
         const string AL_21_Name = "AL_21";
-        const string localhost_IP = "127.0.0.1";
+        const string AL_16_IP = "10.80.73.186";
+        const string AL_16_Name = "AL_16";        
+        const string localhost_IP = "127.0.0.1";  
         const string localhost_Name = "localhost";
-        const string STG_1_IP = "190.10.10.97";
+        const string STG_1_IP = "159.49.47.10";
         const string STG_1_Name = "STG_1";
-        const string STG_2_IP = "190.10.10.98";
+        const string STG_2_IP = "159.49.47.17";
         const string STG_2_Name = "STG_2";
-        const string STG_3_IP = "190.10.10.99";
+        const string STG_3_IP = "159.49.253.77";
         const string STG_3_Name = "STG_3";
-        const string Prod_IP = "190.10.10.00";
+        const string Prod_IP = "";
         const string Prod_Name = "Prod";
         private string serverName;
 
@@ -39,6 +41,7 @@ namespace ServerPicker.Model
             {
                 case AL_13_Name: IP = AL_13_IP; Name = AL_13_Name; break;
                 case AL_15_Name: IP = AL_15_IP; Name = AL_15_Name; break;
+                case AL_16_Name: IP = AL_16_IP; Name = AL_16_Name; break;
                 case AL_7_Name: IP = AL_7_IP; Name = AL_7_Name; break;
                 case AL_19_Name: IP = AL_19_IP; Name = AL_19_Name; break;
                 case AL_21_Name: IP = AL_21_IP; Name = AL_21_Name; break;
@@ -74,21 +77,24 @@ namespace ServerPicker.Model
                 var tales = string.Format("{0} {1} #{2}", IP, ASCOM, Name);
                 string[] lines = File.ReadAllLines(hostfile);
 
-                if (lines.Any(s => s.Contains(ASCOM)))
+                if (lines.ToArray().Any(s => s.Contains(ASCOM)))
                 {
                     for (int i = 0; i < lines.Length; i++)
                     {
                         if (lines[i].Contains(ASCOM))
-                            lines[i] = tales;
+                        {
+                            lines = SetEnvValue(tales, lines, i);
+                        }
+
                     }
                     File.WriteAllLines(hostfile, lines);
                 }
-                else if (!lines.Contains(tales))
+                else if (!lines.Contains(tales) && !Name.Equals(Prod_Name))
                 {
                     File.AppendAllLines(hostfile, new String[] { tales });
                 }
-                CurrentEnvironment = string.Format("Current Environment: {0} (IP#: {1})", Name, IP);
 
+                CurrentEnvironment = Name.Equals(Prod_Name) ? "Current Environment: Prod" : string.Format("Current Environment: {0} (IP#: {1})", Name, IP);
             }
             catch (Exception ex)
             {
@@ -96,6 +102,19 @@ namespace ServerPicker.Model
             }
 
 
+        }
+
+        private string[] SetEnvValue(string tales, string[] lines, int i)
+        {
+            if (Name.Equals(Prod_Name))
+            {
+                var list = new List<string>(lines);
+                list.Remove(lines[i]);
+                lines = list.ToArray();
+            }
+            else
+                lines[i] = tales;
+            return lines;
         }
 
         internal static string GetCurrentEnv()
@@ -127,14 +146,32 @@ namespace ServerPicker.Model
 
                 var hostFileAttributes = currentEnv.Split(' ');
 
-                return hostFileAttributes.Length == 3 ? string.Format("Current Environment: {0} (IP#: {1})", hostFileAttributes[2].ToString().Replace("#", string.Empty), hostFileAttributes[0]) : "No AS Environment defined on host file";
- 
+                return hostFileAttributes.Length == 3 ? string.Format("Current Environment: {0} (IP#: {1})", hostFileAttributes[2].ToString().Replace("#", string.Empty), hostFileAttributes[0]) : "Current Environment: Prod";
+
             }
             catch (Exception ex)
             {
                 return ex.Message.Contains("is denied") ? "No permissions to update hosts file. Run as administrator" : ex.Message;
             }
 
+        }
+
+        internal static List<ASServer> GetAllServers()
+        {
+            return new List<ASServer>()
+            {
+                new ASServer(localhost_Name),
+                new ASServer(AL_7_Name),
+                new ASServer(AL_13_Name),
+                new ASServer(AL_15_Name),
+                new ASServer(AL_16_Name),
+                new ASServer(AL_19_Name),
+                new ASServer(AL_21_Name),
+                new ASServer(STG_1_Name),
+                new ASServer(STG_2_Name),
+                new ASServer(STG_3_Name),
+                new ASServer(Prod_Name)
+            };
         }
     }
 }

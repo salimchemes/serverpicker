@@ -1,5 +1,9 @@
 ﻿using ServerPicker.Model;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace ServerPicker
@@ -11,66 +15,80 @@ namespace ServerPicker
             InitializeComponent();
         }
 
-        private void Apply_Click_LocalHost(object sender, EventArgs e)
-        {
-            CreateServerObject(((ButtonBase)sender).Text);
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.resultLabel.Text = ASServer.GetCurrentEnv();
+            List<ASServer> allEnvs = ASServer.GetAllServers();
+            AddLocalhostButton(allEnvs);
+            AddAlphaButtons(allEnvs);
+            AddStagingButtons(allEnvs);
+            AddProdButton(allEnvs);
+            resultLabel.Text = ASServer.GetCurrentEnv();
         }
 
-        private void Apply_Click_AL_15(object sender, EventArgs e)
+        private void AddAlphaButtons(List<ASServer> allEnvs)
         {
-            CreateServerObject(((ButtonBase)sender).Text);
+            var al_boxes = allEnvs.Where(x => x.Name.Contains("AL_"));
+            var yAxis = 53;
+            var xAxis = 104;
+            foreach (var al in al_boxes)
+            {
+                CreateButton(xAxis, yAxis, al);
+                yAxis = yAxis + 45;
+            }
         }
 
-        private void Apply_Click_AL_13(object sender, EventArgs e)
+        private void CreateButton(int xAxis, int yAxis, ASServer serverBox)
         {
-            CreateServerObject(((ButtonBase)sender).Text);
+            var button = new Button()
+            {
+                Text = serverBox.Name,
+                Location = new Point(xAxis, yAxis),
+                ForeColor = SystemColors.ActiveCaptionText,
+                Size = new Size(58, 29),
+            };
+            button.Click += new EventHandler(Apply_Click);
+            Controls.Add(button);
         }
 
-        private void Apply_Click_AL_7(object sender, EventArgs e)
+        private void AddStagingButtons(List<ASServer> allEnvs)
         {
-            CreateServerObject(((ButtonBase)sender).Text);
+            var staging_boxes = allEnvs.Where(x => x.Name.Contains("STG_"));
+            var yAxis = 53;
+            var xAxis = 205;
+            foreach (var stg in staging_boxes)
+            {
+                CreateButton(xAxis, yAxis, stg);
+                yAxis = yAxis + 45;
+            }
         }
 
-        private void Apply_Click_AL_19(object sender, EventArgs e)
+        private void AddLocalhostButton(List<ASServer> allEnvs)
         {
-            CreateServerObject(((ButtonBase)sender).Text);
+            var localhost = allEnvs.Find(x => x.Name.Equals("localhost"));
+            CreateButton(11, 53, localhost); 
         }
 
-        private void Apply_Click_AL_21(object sender, EventArgs e)
+        private void AddProdButton(List<ASServer> allEnvs)
         {
-            CreateServerObject(((ButtonBase)sender).Text);
+            var prod = allEnvs.Find(x => x.Name.Equals("Prod")); 
+            CreateButton(300, 53, prod);  
         }
 
-        private void Apply_Click_Stg_1(object sender, EventArgs e)
-        {
-            CreateServerObject(((ButtonBase)sender).Text);
-        }
-
-        private void Apply_Click_Prod(object sender, EventArgs e)
-        {
-            CreateServerObject(((ButtonBase)sender).Text);
-        }
-
-        private void Apply_Click_Stg_2(object sender, EventArgs e)
-        {
-            CreateServerObject(((ButtonBase)sender).Text);
-        }
-
-        private void Apply_Click_Stg_3(object sender, EventArgs e)
+        private void Apply_Click(object sender, EventArgs e)
         {
             CreateServerObject(((ButtonBase)sender).Text);
         }
 
         private void CreateServerObject(string serverName)
         {
-            var server = new ASServer(serverName); 
-            resultLabel.Text = server.CurrentEnvironment; 
+            var server = new ASServer(serverName);
+            resultLabel.Text = server.CurrentEnvironment;
         }
 
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ProcessStartInfo sInfo = new ProcessStartInfo("http://www.alaskaair.com/");
+            Process.Start(sInfo);
+        }
     }
 }

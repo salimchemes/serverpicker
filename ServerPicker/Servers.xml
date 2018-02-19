@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<root>
+  <Server name="localhost">
+    <ip value="127.0.0.1" />
+  </Server>
+  <Server name="AL_7">
+    <ip value="124.0.0.0"/>
+  </Server>
+</root>
