@@ -81,7 +81,8 @@ namespace ServerPicker
 
         private void CreateServerObject(string serverName)
         {
-            var server = new ASServer(serverName);
+            var server = new ASServer();
+            server.SetServerProperties(serverName);
             resultLabel.Text = server.CurrentEnvironment;
         }
 

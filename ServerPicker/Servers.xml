@@ -4,6 +4,33 @@
     <ip value="127.0.0.1" />
   </Server>
   <Server name="AL_7">
-    <ip value="124.0.0.0"/>
+    <ip value="10.80.120.119"/>
+  </Server> 
+  <Server name="AL_13">
+    <ip value="10.80.120.90"/>
+  </Server>
+  <Server name="AL_15">
+    <ip value="10.80.73.181"/>
+  </Server>
+  <Server name="AL_16">
+    <ip value="10.80.73.186"/>
+  </Server>
+  <Server name="AL_19">
+    <ip value="10.80.120.233"/>
+  </Server>
+  <Server name="AL_21">
+    <ip value="10.80.120.239"/>
+  </Server>
+  <Server name="STG_1">
+    <ip value="159.49.47.10"/>
+  </Server>
+  <Server name="STG_2">
+    <ip value="159.49.47.17"/>
+  </Server>
+  <Server name="STG_3">
+    <ip value="159.49.253.77"/>
+  </Server>
+  <Server name="Prod">
+    <ip value=""/>
   </Server>
 </root>
