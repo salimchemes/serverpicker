@@ -4,16 +4,19 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace ServerPicker.Model
 {
     public class ASServer
     {
-        const string ASCOM = "www.alaskaair.com"; 
-        const string Prod_Name = "Prod";      
+        const string ASCOM = "www.alaskaair.com";
+
+        const string Prod_Name = "Prod";
 
         public string IP { get; set; }
+
         public string Name { get; set; }
 
         public string CurrentEnvironment { get; set; }
@@ -62,19 +65,6 @@ namespace ServerPicker.Model
 
         }
 
-        private string[] SetEnvValue(string tales, string[] lines, int i, string name)
-        {
-            if (name.Equals(Prod_Name))
-            {
-                var list = new List<string>(lines);
-                list.Remove(lines[i]);
-                lines = list.ToArray();
-            }
-            else
-                lines[i] = tales;
-            return lines;
-        }
-
         internal static string GetCurrentEnv()
         {
             try
@@ -118,7 +108,8 @@ namespace ServerPicker.Model
         {
             var list = new List<ASServer>();
             StringBuilder result = new StringBuilder();
-            var xml = string.Format(@"{0}\\Servers.xml", Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
+            var path = AppDomain.CurrentDomain.BaseDirectory;
+            var xml = string.Format(@"{0}\\Servers.xml", path);
 
             foreach (XElement server in XElement.Load(xml).Elements("Server"))
             {
@@ -132,9 +123,26 @@ namespace ServerPicker.Model
 
         }
 
+        #region Private Methods
+
         private ASServer GetServer(string server)
         {
             return GetAllServers().Where(x => x.Name.Equals(server)).FirstOrDefault();
         }
+
+        private string[] SetEnvValue(string tales, string[] lines, int i, string name)
+        {
+            if (name.Equals(Prod_Name))
+            {
+                var list = new List<string>(lines);
+                list.Remove(lines[i]);
+                lines = list.ToArray();
+            }
+            else
+                lines[i] = tales;
+            return lines;
+        }
+
+        #endregion
     }
 }
