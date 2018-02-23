@@ -1,36 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root>
   <Server name="localhost">
-    <ip value="127.0.0.1" />
+    <ascomip value="127.0.0.1" />
+    <easybizip value="127.0.0.1"/> 
   </Server>
   <Server name="AL_7">
-    <ip value="10.80.120.119"/>
+    <ascomip value="10.80.120.119"/>
+    <easybizip value="10.80.120.120"/>
   </Server> 
   <Server name="AL_13">
-    <ip value="10.80.120.90"/>
+    <ascomip value="10.80.120.90"/>
+    <easybizip value="10.80.120.91"/> 
   </Server>
   <Server name="AL_15">
-    <ip value="10.80.73.181"/>
+    <ascomip value="10.80.73.181"/>
+    <easybizip value="10.80.73.182"/> 
   </Server>
   <Server name="AL_16">
-    <ip value="10.80.73.186"/>
+    <ascomip value="10.80.73.186"/>
+    <easybizip value="10.80.73.187"/>
   </Server>
   <Server name="AL_19">
-    <ip value="10.80.120.233"/>
+    <ascomip value="10.80.120.233"/>
+    <easybizip value="10.80.120.234"/> 
   </Server>
   <Server name="AL_21">
-    <ip value="10.80.120.239"/>
+    <ascomip value="10.80.120.239"/>
+    <easybizip value="10.80.120.240"/> 
   </Server>
   <Server name="STG_1">
-    <ip value="159.49.47.10"/>
+    <ascomip value="159.49.47.10"/>
+    <easybizip value="159.49.47.11"/>
   </Server>
   <Server name="STG_2">
-    <ip value="159.49.47.17"/>
+    <ascomip value="159.49.47.17"/>
+    <easybizip value="159.49.47.18"/> 
   </Server>
   <Server name="STG_3">
-    <ip value="159.49.253.77"/>
+    <ascomip value="159.49.253.77"/>
+    <easybizip value="159.49.253.78"/> 
   </Server>
   <Server name="Prod">
-    <ip value=""/>
+    <ascomip value=""/>
+    <easybizip value=""/>
   </Server>
 </root>

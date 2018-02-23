@@ -86,9 +86,14 @@ namespace ServerPicker
             resultLabel.Text = server.CurrentEnvironment;
         }
 
-        private void OpenUrl(object sender, LinkLabelLinkClickedEventArgs e)
+        private void OpenAsCom(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ProcessStartInfo sInfo = new ProcessStartInfo("http://www.alaskaair.com/");
+            OpenLink("http://www.alaskaair.com/");
+        }
+
+        private static void OpenLink(string link)
+        {
+            ProcessStartInfo sInfo = new ProcessStartInfo(link);
             Process.Start(sInfo);
         }
 
@@ -101,6 +106,11 @@ namespace ServerPicker
                 var form = new PopupForm();
                 form.Show();
             }
+        }
+
+        private void OpenEasyBiz(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OpenLink("http://easybiz.alaskaair.com");
         }
     }
 }
