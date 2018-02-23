@@ -22,7 +22,7 @@ namespace ServerPicker
             AddAlphaButtons(allEnvs);
             AddStagingButtons(allEnvs);
             AddProdButton(allEnvs);
-            resultLabel.Text = ASServer.GetCurrentEnv(); 
+            resultLabel.Text = ASServer.GetCurrentEnv();
         }
 
         private void AddAlphaButtons(List<ASServer> allEnvs)
@@ -65,13 +65,13 @@ namespace ServerPicker
         private void AddLocalhostButton(List<ASServer> allEnvs)
         {
             var localhost = allEnvs.Find(x => x.Name.Equals("localhost"));
-            CreateButton(11, 53, localhost); 
+            CreateButton(11, 53, localhost);
         }
 
         private void AddProdButton(List<ASServer> allEnvs)
         {
-            var prod = allEnvs.Find(x => x.Name.Equals("Prod")); 
-            CreateButton(300, 53, prod);  
+            var prod = allEnvs.Find(x => x.Name.Equals("Prod"));
+            CreateButton(300, 53, prod);
         }
 
         private void Apply_Click(object sender, EventArgs e)
@@ -86,10 +86,21 @@ namespace ServerPicker
             resultLabel.Text = server.CurrentEnvironment;
         }
 
-        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void OpenUrl(object sender, LinkLabelLinkClickedEventArgs e)
         {
             ProcessStartInfo sInfo = new ProcessStartInfo("http://www.alaskaair.com/");
             Process.Start(sInfo);
+        }
+
+        private void OpenMOW_Modal(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (Application.OpenForms["PopupForm"] as PopupForm != null)
+                Application.OpenForms["PopupForm"].Focus();
+            else
+            {
+                var form = new PopupForm();
+                form.Show();
+            }
         }
     }
 }
