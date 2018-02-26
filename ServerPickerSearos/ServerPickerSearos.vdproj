@@ -40,13 +40,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F6B82AE1FD52EDBB4E57A3794C282AB7"
+        "OwnerKey" = "8:_6BB860EDCD9C4D2495C3B4E000257E27"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6BB860EDCD9C4D2495C3B4E000257E27"
+        "OwnerKey" = "8:_F6B82AE1FD52EDBB4E57A3794C282AB7"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -74,6 +74,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
         "Release"
@@ -175,6 +183,11 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
+                    "_F6B82AE1FD52EDBB4E57A3794C282AB7"
+                    {
+                    "Name" = "8:System.Net.Http.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -250,15 +263,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ServerPickerSearos"
-        "ProductCode" = "8:{2373C7C4-3BAA-4A75-8139-CFF538A77E07}"
-        "PackageCode" = "8:{6EC56FD0-9D6F-4463-9133-240C91D063E9}"
+        "ProductCode" = "8:{10C414AB-D5F2-448E-B6AC-FD2F4AB51C92}"
+        "PackageCode" = "8:{B983AD0A-6933-4C6D-8929-1534FBE550A2}"
         "UpgradeCode" = "8:{F3CE52C5-E94E-4DF6-8921-41830EC43C45}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:Searos"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
