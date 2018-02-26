@@ -45,7 +45,7 @@ namespace ServerPicker.Model
                 lines = UpdateHostsFileValues(xmlServer, hostfile, talesAsCom, lines, ASCOM);
                 lines = UpdateHostsFileValues(xmlServer, hostfile, talesEasyBiz, lines, EASYBIZ);
 
-                CurrentEnvironment = xmlServer.Name.Equals(Prod_Name) ? "Prod: Ascom and EazyBiz" : string.Format("{0}: Ascom: ({1}) Easybiz: ({2})", xmlServer.Name, xmlServer.AsComIp, xmlServer.EasyBizIp);
+                CurrentEnvironment = SetEnvMessage(xmlServer);
             }
             catch (Exception ex)
             {
@@ -53,8 +53,33 @@ namespace ServerPicker.Model
             }
 
 
+        } 
+
+
+        internal static List<ASServer> GetAllServers()
+        {
+            var list = new List<ASServer>();
+            StringBuilder result = new StringBuilder();
+            var path = AppDomain.CurrentDomain.BaseDirectory;
+            var xml = string.Format(@"{0}\\Servers.xml", path);
+
+            foreach (XElement server in XElement.Load(xml).Elements("Server"))
+            {
+                var xmlServer = new ASServer() { Name = server.Attribute("name").Value };
+                foreach (XElement ipServer in server.Elements("ascomip"))
+                    xmlServer.AsComIp = ipServer.Attribute("value").Value;
+
+                foreach (XElement ipServer in server.Elements("easybizip"))
+                    xmlServer.EasyBizIp = ipServer.Attribute("value").Value;
+
+
+                list.Add(xmlServer);
+            }
+            return list;
+
         }
 
+        #region Private Methods
         private string[] UpdateHostsFileValues(ASServer xmlServer, string hostfile, string entry, string[] lines, string site)
         {
             if (lines.ToArray().Any(s => s.Contains(site)))
@@ -107,9 +132,9 @@ namespace ServerPicker.Model
                 var hostFileAttributes = currentEnv.Split(' ');
                 var xmlServer = new ASServer();
                 if (hostFileAttributes.Length == 3)
-                    xmlServer = GetServer(hostFileAttributes[2].ToString().Replace("#", string.Empty)); 
+                    xmlServer = GetServer(hostFileAttributes[2].ToString().Replace("#", string.Empty));
 
-                return xmlServer.Name != null ? string.Format("{0}: Ascom: ({1}) Easybiz: ({2})", xmlServer.Name, xmlServer.AsComIp, xmlServer.EasyBizIp) : "Prod: Ascom and EazyBiz";
+                return SetEnvMessage(xmlServer);
 
             }
             catch (Exception ex)
@@ -118,31 +143,6 @@ namespace ServerPicker.Model
             }
 
         }
-
-        internal static List<ASServer> GetAllServers()
-        {
-            var list = new List<ASServer>();
-            StringBuilder result = new StringBuilder();
-            var path = AppDomain.CurrentDomain.BaseDirectory;
-            var xml = string.Format(@"{0}\\Servers.xml", path);
-
-            foreach (XElement server in XElement.Load(xml).Elements("Server"))
-            {
-                var xmlServer = new ASServer() { Name = server.Attribute("name").Value };
-                foreach (XElement ipServer in server.Elements("ascomip"))
-                    xmlServer.AsComIp = ipServer.Attribute("value").Value;
-
-                foreach (XElement ipServer in server.Elements("easybizip"))
-                    xmlServer.EasyBizIp = ipServer.Attribute("value").Value;
-
-
-                list.Add(xmlServer);
-            }
-            return list;
-
-        }
-
-        #region Private Methods
 
         internal static ASServer GetServer(string server)
         {
@@ -160,6 +160,11 @@ namespace ServerPicker.Model
             else
                 lines[i] = tales;
             return lines;
+        }
+
+        private static string SetEnvMessage(ASServer xmlServer)
+        {
+            return xmlServer.Name != null ? string.Format("{0}: Ascom: ({1}) Easybiz: ({2})", xmlServer.Name, xmlServer.AsComIp, xmlServer.EasyBizIp) : "Prod: Ascom and EazyBiz";
         }
 
         #endregion
